@@ -1,0 +1,14 @@
+{
+  "name": "avitotest",
+  "version": "1.0.0",
+  "description": "Avito test github api",
+  "main": "index.html",
+  "scripts": {
+    "start": "browser-sync start --server"
+  },
+  "author": "Arseniy Suschevkiy",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.26.7"
+  }
+}
