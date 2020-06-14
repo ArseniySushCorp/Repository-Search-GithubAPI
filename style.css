@@ -123,3 +123,6 @@ tr:nth-child(even){
 .user-block-title{
     text-align: center;
 }
+.active{
+    background: lightslategray !important;
+}

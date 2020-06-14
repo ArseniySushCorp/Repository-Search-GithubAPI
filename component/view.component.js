@@ -38,6 +38,8 @@ export class ViewComponent{
 		this.app.append(this.title);
 		this.app.append(this.searchLine);
 		this.app.append(this.main);
+
+		this.tabs = [];
 	}
 
 	// Функция для создания элемента
@@ -53,7 +55,7 @@ export class ViewComponent{
 	createRepository(repData) {
 		const repElement = this.createElement('tr','repository');
 		const lastCommit = new Date((repData.updated_at)).toDateString()
-		repElement.addEventListener('click', () => this.showUserData(repData))
+		repElement.addEventListener('click', () => this.showUserData(repData, repElement))
 		// item.name , item.stargazers_count , item.updated_at , item.html_url
 		repElement.innerHTML = `<td>${repData.name}</td>
 								 <td>Stars:${repData.stargazers_count}</td>
@@ -64,7 +66,10 @@ export class ViewComponent{
 
 	// Показываем данные выбранного пользователя
 	//userData.description,  userData.name , userData.stargazers_count , lastCommit, userData.html_url, userData.owner.login
-	showUserData(userData) {
+	showUserData(userData, event) {
+		this.tabs = document.querySelectorAll('.repository');
+		this.addActiveClass(event);
+
 		const userEl = this.createElement('div','user');
 		this.userWrapper.innerHTML = '';
 		this.api.loadUserData(userData.name, userData.owner.login)
@@ -117,5 +122,12 @@ export class ViewComponent{
 	//Показываем или скрываем кнопку "Load more"
 	setCounterMessage(message) {
 		this.searchCounter.textContent = message;
+	}
+
+	addActiveClass(tab) {
+		this.tabs.forEach( tab => {
+			tab.classList.remove('active')
+		})
+		tab.classList.add('active');
 	}
 }
